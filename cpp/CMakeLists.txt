@@ -14,3 +14,5 @@ add_subdirectory(test-catch2)
 add_subdirectory(test-doctest)
 add_subdirectory(test-gtest)
 
+add_executable(main main.cpp)
+target_link_libraries(main src)
