@@ -19,8 +19,9 @@ public:
         const uint8_t pin1 = 8,
         const uint8_t pin2 = 9,
         const uint8_t pin3 = 10,
-        const uint8_t pin4 = 11): _speed(10) {
-    };
+        const uint8_t pin4 = 11): _speed(10)
+    // logic related to the pins is omitted in this exercise
+    {};
 
     // Set the speed of the motor in RPM. Maximum is defined above.
     void setSpeed(uint8_t);

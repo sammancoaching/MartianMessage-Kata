@@ -9,3 +9,6 @@ add_subdirectory(test-cmocka)
 add_subdirectory(test-catch2)
 add_subdirectory(test-cgreen)
 add_subdirectory(test-gtest)
+
+add_executable(main main.c)
+target_link_libraries(main src)

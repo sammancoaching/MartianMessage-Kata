@@ -42,5 +42,3 @@ endfunction()
 
 
 add_subdirectory(simple_test)
-add_subdirectory(sample_test)
-add_subdirectory(uptime)

@@ -3,13 +3,13 @@
 
 extern "C"
 {
-#include "sample.h"
+#include "stepper.h"
 }
 
 
 TEST_CASE ("Sample") {
     SECTION("sample section") {
-        REQUIRE(42 == add(1,2));
+        REQUIRE(42 == 0);
     }
 }
 

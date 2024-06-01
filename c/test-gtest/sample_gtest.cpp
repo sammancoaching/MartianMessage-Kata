@@ -2,11 +2,11 @@
 
 extern "C"
 {
-#include "sample.h"
+#include "stepper.h"
 }
 
 using namespace std;
 
 TEST(SampleSuite, SampleTest) {
-    ASSERT_EQ(42, add(1,2));
+    ASSERT_EQ(42, 0);
 }
