@@ -1,5 +1,7 @@
 package codingdojo;
 
+import org.lambda.query.Queryable;
+
 /**
  * This class is a placeholder for a real object that would be able to
  * control an electric stepper motor.
@@ -23,6 +25,10 @@ public class Stepper {
     public Stepper(int pin1, int pin2, int pin3, int pin4) {
         speed = 10;
         // logic related to the pins is omitted in this exercise
+    }
+
+    public static Queryable<Move> getMovesFor(Queryable<codingdojo.Ascii> hex, int startingPosition) {
+        return new Queryable<Move>(Move.class);
     }
 
     /**
