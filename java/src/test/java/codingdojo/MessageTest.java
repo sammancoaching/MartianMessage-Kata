@@ -11,27 +11,22 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MessageTest {
-    @Test
-    void sample() {
-        assertEquals(true, false);
-    }
 
     @Test
     @UseReporter(AutoApproveReporter.class)
     public void testHowAlive() {
         var expected = """
             Initial:
-            Message: H
+            Message: HOW
             
             Frame #1:
-            HEX: [48]
+            HEX: [48, 4F, 57]
             
             Frame #2:
-            [5 steps clockwise, short, 4 steps clockwise, long]
-            [[5,4]]
+            [[5,4], [-4,11], [-10,2]]
             """;
         var storyboard = new StoryBoard();
-        var message = "H";
+        var message = "HOW";
         storyboard.add("Message: " + message);
         var hex = HexTranslator.toHex(message);
         storyboard.add("HEX: " + hex);

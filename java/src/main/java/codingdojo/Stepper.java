@@ -1,5 +1,6 @@
 package codingdojo;
 
+import org.apache.commons.lang3.mutable.Mutable;
 import org.lambda.query.Queryable;
 
 /**
@@ -28,7 +29,24 @@ public class Stepper {
     }
 
     public static Queryable<Move> getMovesFor(Queryable<codingdojo.Ascii> hex, int startingPosition) {
-        return new Queryable<Move>(Move.class);
+        Queryable<Move> moves = Queryable.of();
+        for (Ascii ascii : hex) {
+            Move move = getMoveFor(ascii, startingPosition);
+            startingPosition = move.getEndingPosition();
+            moves.add(move);
+        }
+        return moves;
+    }
+
+    private static Move getMoveFor(Ascii ascii, int startingPosition) {
+        int first = toPosition(ascii.getFirstHexValue()) - startingPosition;
+        int currentPosition = startingPosition + first;
+        int second = toPosition(ascii.getSecondHexValue());
+        return new Move(first, second - currentPosition, startingPosition);
+    }
+
+    private static int toPosition(int ascii) {
+        return ascii + 1;
     }
 
     /**
