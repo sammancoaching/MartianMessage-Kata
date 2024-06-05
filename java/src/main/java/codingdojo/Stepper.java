@@ -104,6 +104,15 @@ public class Stepper {
         regularMove(move);
     }
 
+    public void sendMessage(String message) {
+        Queryable<Ascii> hex = HexTranslator.toHex(message);
+        Queryable<Move> moves = getMovesFor(hex, 0);
+        for (Move move : moves) {
+            move(move);
+        }
+    }
+
+
     private void endOfMessageMove() {
         move_anticlockwise(currentStep);
     }
