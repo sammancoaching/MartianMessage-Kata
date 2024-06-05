@@ -24,7 +24,7 @@ public class MessageTest {
             HEX: [48, 4F, 57, 20, 41, 4C, 49, 56, 45, 3F]
             
             Frame #2:
-            [[5,4], [-4,11], [-10,2], [-5,-2], [4,-3], [3,8], [-8,5], [-4,1], [-2,1], [-2,12], [EOM]]
+            [[EOM], [5,4], [-4,11], [-10,2], [-5,-2], [4,-3], [3,8], [-8,5], [-4,1], [-2,1], [-2,12], [EOM]]
             """;
         var storyboard = new StoryBoard();
         var message = "HOW ALIVE?";
@@ -51,9 +51,9 @@ public class MessageTest {
             """;
         var output = SimpleLogger.logToString();
         Stepper stepper = new Stepper(Action1.doNothing());
-        stepper.move(new Move(5, 4, 0));
-        stepper.move(new Move(-4, 11, 0));
-        stepper.move(new EndOfMessage());
+        new Move(5, 4, 0).perform(stepper);
+        new Move(-4, 11, 0).perform(stepper);
+        ((Move) new EndOfMessage()).perform(stepper);
         Approvals.verify(output, new Options().inline(expected));
     }
 

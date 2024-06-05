@@ -3,7 +3,6 @@ package codingdojo;
 import com.spun.util.logger.SimpleLogger;
 import org.apache.commons.lang3.ThreadUtils;
 import org.lambda.actions.Action1;
-import org.lambda.query.Queryable;
 
 import java.time.Duration;
 
@@ -77,18 +76,6 @@ public class Stepper {
     public boolean isRunning() {
         // logic to read the pins and determine this omitted in this exercise
         return false;
-    }
-
-    public void move(Move move) {
-        move.perform(this);
-    }
-
-    public void sendMessage(String message) {
-        Queryable<Ascii> hex = HexTranslator.toHex(message);
-        Queryable<Move> moves = MessageMover.getMovesFor(hex, 0);
-        for (Move move : moves) {
-            move(move);
-        }
     }
 
 
