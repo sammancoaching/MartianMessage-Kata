@@ -49,6 +49,7 @@ public class Stepper {
             startingPosition = move.getEndingPosition();
             moves.add(move);
         }
+        moves.add(new EndOfMessage());
         return moves;
     }
 
@@ -97,9 +98,17 @@ public class Stepper {
 
     public void move(Move move) {
         if (move instanceof EndOfMessage) {
-            move_anticlockwise(currentStep);
+            endOfMessageMove();
             return;
         }
+        regularMove(move);
+    }
+
+    private void endOfMessageMove() {
+        move_anticlockwise(currentStep);
+    }
+
+    private void regularMove(Move move) {
         move(move.getFirst());
         waitTime(5000);
         move(move.getSecond());
