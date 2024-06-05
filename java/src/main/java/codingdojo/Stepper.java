@@ -47,28 +47,6 @@ public class Stepper {
         sleeper = sleepQuietly;
     }
 
-    public static Queryable<Move> getMovesFor(Queryable<codingdojo.Ascii> hex, int startingPosition) {
-        Queryable<Move> moves = Queryable.of();
-        for (Ascii ascii : hex) {
-            Move move = getMoveFor(ascii, startingPosition);
-            startingPosition = move.getEndingPosition();
-            moves.add(move);
-        }
-        moves.add(new EndOfMessage());
-        return moves;
-    }
-
-    private static Move getMoveFor(Ascii ascii, int startingPosition) {
-        int first = toPosition(ascii.getFirstHexValue()) - startingPosition;
-        int currentPosition = startingPosition + first;
-        int second = toPosition(ascii.getSecondHexValue());
-        return new Move(first, second - currentPosition, startingPosition);
-    }
-
-    private static int toPosition(int flagValue) {
-        return flagValue + 1;
-    }
-
     /**
      * Set the speed of the motor in RPM. Maximum is defined above.
      */
@@ -107,16 +85,12 @@ public class Stepper {
 
     public void sendMessage(String message) {
         Queryable<Ascii> hex = HexTranslator.toHex(message);
-        Queryable<Move> moves = getMovesFor(hex, 0);
+        Queryable<Move> moves = MessageMover.getMovesFor(hex, 0);
         for (Move move : moves) {
             move(move);
         }
     }
 
-
-    private void endOfMessageMove() {
-        move_anticlockwise(currentStep);
-    }
 
     public void waitTime(int milliseconds) {
         Duration duration = Duration.ofMillis(milliseconds);
