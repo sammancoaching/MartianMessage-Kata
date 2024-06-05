@@ -24,6 +24,11 @@ public class Stepper {
     private final Action1<Duration> sleeper;
     private int speed;
     private Action1<Duration> sleep;
+
+    public int getCurrentStep() {
+        return currentStep;
+    }
+
     private int currentStep = 0;
 
     public Stepper() {
@@ -97,11 +102,7 @@ public class Stepper {
     }
 
     public void move(Move move) {
-        if (move instanceof EndOfMessage) {
-            endOfMessageMove();
-            return;
-        }
-        regularMove(move);
+        move.perform(this);
     }
 
     public void sendMessage(String message) {
@@ -117,14 +118,7 @@ public class Stepper {
         move_anticlockwise(currentStep);
     }
 
-    private void regularMove(Move move) {
-        move(move.getFirst());
-        waitTime(5000);
-        move(move.getSecond());
-        waitTime(10000);
-    }
-
-    private void waitTime(int milliseconds) {
+    public void waitTime(int milliseconds) {
         Duration duration = Duration.ofMillis(milliseconds);
         sleeper.call(duration);
         SimpleLogger.event("Sleeping " + duration.getSeconds() + " seconds");
@@ -133,11 +127,4 @@ public class Stepper {
     }
 
 
-    private void move(int amount) {
-        if (amount > 0) {
-            move_clockwise(amount * 120);
-        } else {
-            move_anticlockwise(- (amount * 120));
-        }
-    }
 }

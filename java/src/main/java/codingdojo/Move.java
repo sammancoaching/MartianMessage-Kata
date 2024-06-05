@@ -3,6 +3,21 @@ package codingdojo;
 public class Move {
 
 
+    public static void move(Stepper stepper, int amount) {
+        if (amount > 0) {
+            stepper.move_clockwise(amount * 120);
+        } else {
+            stepper.move_anticlockwise(- (amount * 120));
+        }
+    }
+
+    public void perform(Stepper stepper) {
+        move(stepper, getFirst());
+        stepper.waitTime(5000);
+        move(stepper, getSecond());
+        stepper.waitTime(10000);
+    }
+
     public int getFirst() {
         return first;
     }
