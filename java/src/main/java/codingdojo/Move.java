@@ -1,6 +1,16 @@
 package codingdojo;
 
 public class Move {
+
+
+    public int getFirst() {
+        return first;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+
     private final int first;
     private final int second;
     private final int startingPosition;
